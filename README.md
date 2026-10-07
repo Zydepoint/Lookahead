@@ -1,7 +1,7 @@
 # Lookahead (WIP)
 <b> Monitoring stack using Prometheus, Grafana for metrics and 'ntfy' for notifications. </b>
 
-<i> Grafana dashboards are uploaded but the rest of my stack will be uploaded later. </i>
+The Grafana dashboards are mostly uploaded, I will upload more later on. Some also requires Loki and Alloy, which I will add as well as the complete monitoring stack.
 
 Every dashboard will complain that the Prometheus datasource does not exist. To solve this, go to the variable settings and configure your Prometheus datasource correctly and all panels should begin to display data. I have changed all panels to use `${datasource}` instead of a hardcoded instance, in which case one would have to change every individual panel of a dashboard.
 
