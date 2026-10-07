@@ -1,0 +1,2426 @@
+{
+  "annotations": [
+    {
+      "kind": "AnnotationQuery",
+      "spec": {
+        "builtIn": true,
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "query": {
+          "datasource": {
+            "name": "-- Grafana --"
+          },
+          "group": "grafana",
+          "kind": "DataQuery",
+          "spec": {},
+          "version": "v0"
+        }
+      }
+    }
+  ],
+  "cursorSync": "Crosshair",
+  "description": "Docker dashboard via Cadvisor",
+  "editable": true,
+  "elements": {
+    "panel-12": {
+      "kind": "Panel",
+      "spec": {
+        "data": {
+          "kind": "QueryGroup",
+          "spec": {
+            "queries": [
+              {
+                "kind": "PanelQuery",
+                "spec": {
+                  "hidden": false,
+                  "query": {
+                    "datasource": {
+                      "name": "${datasource}"
+                    },
+                    "group": "prometheus",
+                    "kind": "DataQuery",
+                    "spec": {
+                      "editorMode": "code",
+                      "expr": "sum(rate(container_cpu_usage_seconds_total{instance=\"$instance\", container_label_com_docker_compose_service=~\"$container\", name!=\"\"}[15m])) by (name) * 100",
+                      "legendFormat": "{{name}}",
+                      "range": true
+                    },
+                    "version": "v0"
+                  },
+                  "refId": "A"
+                }
+              }
+            ],
+            "queryOptions": {
+              "interval": "1m"
+            },
+            "transformations": []
+          }
+        },
+        "description": "",
+        "id": 12,
+        "links": [],
+        "title": "CPU Usage",
+        "transparent": true,
+        "vizConfig": {
+          "group": "timeseries",
+          "kind": "VizConfig",
+          "spec": {
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "continuous-GrYlRd"
+                },
+                "custom": {
+                  "axisBorderShow": true,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisGridShow": true,
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "barWidthFactor": 0.6,
+                  "drawStyle": "line",
+                  "fillOpacity": 13,
+                  "gradientMode": "scheme",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "insertNulls": 3600000,
+                  "lineInterpolation": "smooth",
+                  "lineStyle": {
+                    "fill": "solid"
+                  },
+                  "lineWidth": 2,
+                  "pointSize": 3,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "auto",
+                  "showValues": false,
+                  "spanNulls": true,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "decimals": 1,
+                "fieldMinMax": false,
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    }
+                  ]
+                },
+                "unit": "percent"
+              },
+              "overrides": []
+            },
+            "options": {
+              "annotations": {
+                "clustering": -1,
+                "multiLane": false
+              },
+              "legend": {
+                "calcs": [
+                  "mean"
+                ],
+                "displayMode": "table",
+                "limit": 10,
+                "placement": "right",
+                "showLegend": true,
+                "sortBy": "Mean",
+                "sortDesc": true
+              },
+              "tooltip": {
+                "hideZeros": true,
+                "hoverProximity": 100,
+                "maxHeight": 600,
+                "mode": "single",
+                "sort": "desc"
+              }
+            }
+          },
+          "version": "13.0.3"
+        }
+      }
+    },
+    "panel-13": {
+      "kind": "Panel",
+      "spec": {
+        "data": {
+          "kind": "QueryGroup",
+          "spec": {
+            "queries": [
+              {
+                "kind": "PanelQuery",
+                "spec": {
+                  "hidden": false,
+                  "query": {
+                    "datasource": {
+                      "name": "${datasource}"
+                    },
+                    "group": "prometheus",
+                    "kind": "DataQuery",
+                    "spec": {
+                      "editorMode": "code",
+                      "expr": "sum by (name)(container_memory_usage_bytes{image!=\"\",instance=\"$instance\", container_label_com_docker_compose_service=~\"$container\", name!=\"\"})",
+                      "intervalFactor": 1,
+                      "legendFormat": "{{ name }}",
+                      "metric": "container_memory_usage",
+                      "range": true,
+                      "step": 1
+                    },
+                    "version": "v0"
+                  },
+                  "refId": "A"
+                }
+              }
+            ],
+            "queryOptions": {
+              "interval": "1m"
+            },
+            "transformations": []
+          }
+        },
+        "description": "",
+        "id": 13,
+        "links": [],
+        "title": "Container Memory Usage",
+        "transparent": true,
+        "vizConfig": {
+          "group": "timeseries",
+          "kind": "VizConfig",
+          "spec": {
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "fixedColor": "blue",
+                  "mode": "continuous-BlYlRd"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisGridShow": false,
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "axisSoftMax": 1100000000,
+                  "barAlignment": 0,
+                  "barWidthFactor": 0.6,
+                  "drawStyle": "line",
+                  "fillOpacity": 10,
+                  "gradientMode": "hue",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "insertNulls": false,
+                  "lineInterpolation": "smooth",
+                  "lineStyle": {
+                    "fill": "solid"
+                  },
+                  "lineWidth": 2,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "never",
+                  "showValues": false,
+                  "spanNulls": true,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "decimals": 0,
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "bytes"
+              },
+              "overrides": []
+            },
+            "options": {
+              "annotations": {
+                "clustering": -1,
+                "multiLane": false
+              },
+              "legend": {
+                "calcs": [
+                  "mean"
+                ],
+                "displayMode": "table",
+                "limit": 10,
+                "placement": "right",
+                "showLegend": true,
+                "sortBy": "Mean",
+                "sortDesc": true
+              },
+              "tooltip": {
+                "hideZeros": true,
+                "hoverProximity": 100,
+                "maxHeight": 600,
+                "mode": "single",
+                "sort": "desc"
+              }
+            }
+          },
+          "version": "13.0.3"
+        }
+      }
+    },
+    "panel-14": {
+      "kind": "Panel",
+      "spec": {
+        "data": {
+          "kind": "QueryGroup",
+          "spec": {
+            "queries": [
+              {
+                "kind": "PanelQuery",
+                "spec": {
+                  "hidden": false,
+                  "query": {
+                    "datasource": {
+                      "name": "${datasource}"
+                    },
+                    "group": "prometheus",
+                    "kind": "DataQuery",
+                    "spec": {
+                      "editorMode": "code",
+                      "expr": "sum by (name) (container_memory_cache{image!=\"\",instance=\"$instance\", container_label_com_docker_compose_service=~\"$container\", name!=\"\"})",
+                      "intervalFactor": 2,
+                      "legendFormat": "{{name}}",
+                      "metric": "container_memory_cache",
+                      "range": true,
+                      "step": 2
+                    },
+                    "version": "v0"
+                  },
+                  "refId": "A"
+                }
+              }
+            ],
+            "queryOptions": {
+              "interval": "1m"
+            },
+            "transformations": []
+          }
+        },
+        "description": "",
+        "id": 14,
+        "links": [],
+        "title": "Container Cached Memory Usage",
+        "transparent": true,
+        "vizConfig": {
+          "group": "timeseries",
+          "kind": "VizConfig",
+          "spec": {
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "fixedColor": "green",
+                  "mode": "continuous-BlPu"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "axisSoftMax": 1100000000,
+                  "barAlignment": 0,
+                  "barWidthFactor": 0.6,
+                  "drawStyle": "line",
+                  "fillOpacity": 10,
+                  "gradientMode": "hue",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "insertNulls": false,
+                  "lineInterpolation": "linear",
+                  "lineWidth": 2,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "never",
+                  "showValues": false,
+                  "spanNulls": true,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "decimals": 0,
+                "min": 0,
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "bytes"
+              },
+              "overrides": []
+            },
+            "options": {
+              "annotations": {
+                "clustering": -1,
+                "multiLane": false
+              },
+              "legend": {
+                "calcs": [
+                  "mean"
+                ],
+                "displayMode": "table",
+                "limit": 10,
+                "placement": "right",
+                "showLegend": true,
+                "sortBy": "Mean",
+                "sortDesc": true
+              },
+              "tooltip": {
+                "hideZeros": true,
+                "hoverProximity": 100,
+                "maxHeight": 600,
+                "mode": "single",
+                "sort": "desc"
+              }
+            }
+          },
+          "version": "13.0.3"
+        }
+      }
+    },
+    "panel-22": {
+      "kind": "Panel",
+      "spec": {
+        "data": {
+          "kind": "QueryGroup",
+          "spec": {
+            "queries": [
+              {
+                "kind": "PanelQuery",
+                "spec": {
+                  "hidden": false,
+                  "query": {
+                    "datasource": {
+                      "name": "${datasource}"
+                    },
+                    "group": "prometheus",
+                    "kind": "DataQuery",
+                    "spec": {
+                      "editorMode": "code",
+                      "exemplar": false,
+                      "expr": "count(\n  (time() - max_over_time(container_last_seen{instance=~\"$instance\", name!=\"\"}[1h])) > 30\n)",
+                      "format": "table",
+                      "instant": true,
+                      "interval": "",
+                      "legendFormat": "__auto",
+                      "range": false
+                    },
+                    "version": "v0"
+                  },
+                  "refId": "A"
+                }
+              }
+            ],
+            "queryOptions": {
+              "interval": "15s",
+              "timeFrom": "1h"
+            },
+            "transformations": [
+              {
+                "group": "groupBy",
+                "kind": "Transformation",
+                "spec": {
+                  "options": {
+                    "fields": {
+                      "Time": {
+                        "aggregations": [
+                          "lastNotNull"
+                        ],
+                        "operation": "aggregate"
+                      },
+                      "Value": {
+                        "aggregations": [
+                          "lastNotNull"
+                        ],
+                        "operation": "aggregate"
+                      },
+                      "__name__": {
+                        "aggregations": []
+                      },
+                      "container_label_com_docker_compose_config_hash": {
+                        "aggregations": []
+                      },
+                      "container_label_com_docker_compose_project": {
+                        "aggregations": []
+                      },
+                      "container_label_com_docker_compose_project_config_files": {
+                        "aggregations": []
+                      },
+                      "container_label_com_docker_compose_project_working_dir": {
+                        "aggregations": [],
+                        "operation": "groupby"
+                      },
+                      "container_label_com_docker_compose_version": {
+                        "aggregations": []
+                      },
+                      "container_label_name": {
+                        "aggregations": []
+                      },
+                      "image": {
+                        "aggregations": [
+                          "lastNotNull"
+                        ],
+                        "operation": "aggregate"
+                      },
+                      "name": {
+                        "aggregations": [
+                          "lastNotNull"
+                        ],
+                        "operation": "groupby"
+                      },
+                      "status": {
+                        "aggregations": [
+                          "lastNotNull"
+                        ],
+                        "operation": "aggregate"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "group": "organize",
+                "kind": "Transformation",
+                "spec": {
+                  "options": {
+                    "excludeByName": {
+                      "Time (lastNotNull)": true,
+                      "container_label_com_docker_compose_project_working_dir": true,
+                      "image (lastNotNull)": true,
+                      "name": true,
+                      "status (lastNotNull)": true
+                    },
+                    "includeByName": {},
+                    "indexByName": {
+                      "Time (lastNotNull)": 1,
+                      "Value (lastNotNull)": 5,
+                      "container_label_com_docker_compose_project_working_dir": 4,
+                      "image (lastNotNull)": 2,
+                      "name": 0,
+                      "status (lastNotNull)": 3
+                    },
+                    "renameByName": {
+                      "Time (lastNotNull)": "",
+                      "Value (lastNotNull)": "Status",
+                      "container_label_com_docker_compose_project_working_dir": "Working Dir",
+                      "image (lastNotNull)": "Image",
+                      "name": "Container",
+                      "status (lastNotNull)": ""
+                    }
+                  }
+                }
+              },
+              {
+                "group": "filterByValue",
+                "kind": "Transformation",
+                "spec": {
+                  "options": {
+                    "filters": [
+                      {
+                        "config": {
+                          "id": "equal",
+                          "options": {
+                            "value": 1
+                          }
+                        },
+                        "fieldName": "Status"
+                      }
+                    ],
+                    "match": "any",
+                    "type": "exclude"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "description": "cAdvisor does not have a native \"down\" metric. This panel is using the container_last_seen metric, but looking back in time to check if it has recently been scraped for that metric, if it has failed the last 1h; it is considered \"down\". This means the counter will reset after a certain amount of time passes.",
+        "id": 22,
+        "links": [],
+        "title": "Currently DOWN on '$instance'",
+        "vizConfig": {
+          "group": "stat",
+          "kind": "VizConfig",
+          "spec": {
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "fixedColor": "light-red",
+                  "mode": "thresholds"
+                },
+                "noValue": "0",
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "text",
+                      "value": 0
+                    },
+                    {
+                      "color": "orange",
+                      "value": 3
+                    },
+                    {
+                      "color": "red",
+                      "value": 5
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "options": {
+              "colorMode": "value",
+              "graphMode": "none",
+              "justifyMode": "center",
+              "orientation": "auto",
+              "percentChangeColorMode": "standard",
+              "reduceOptions": {
+                "calcs": [
+                  "count"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "showPercentChange": false,
+              "textMode": "auto",
+              "wideLayout": true
+            }
+          },
+          "version": "13.0.3"
+        }
+      }
+    },
+    "panel-23": {
+      "kind": "Panel",
+      "spec": {
+        "data": {
+          "kind": "QueryGroup",
+          "spec": {
+            "queries": [
+              {
+                "kind": "PanelQuery",
+                "spec": {
+                  "hidden": false,
+                  "query": {
+                    "datasource": {
+                      "name": "${datasource}"
+                    },
+                    "group": "prometheus",
+                    "kind": "DataQuery",
+                    "spec": {
+                      "editorMode": "code",
+                      "exemplar": false,
+                      "expr": "container_last_seen{instance=~\"$instance\", name!=\"\"}",
+                      "format": "table",
+                      "instant": true,
+                      "interval": "",
+                      "legendFormat": "__auto",
+                      "range": false
+                    },
+                    "version": "v0"
+                  },
+                  "refId": "A"
+                }
+              }
+            ],
+            "queryOptions": {
+              "interval": "15s"
+            },
+            "transformations": [
+              {
+                "group": "groupBy",
+                "kind": "Transformation",
+                "spec": {
+                  "options": {
+                    "fields": {
+                      "Time": {
+                        "aggregations": [
+                          "lastNotNull"
+                        ],
+                        "operation": "aggregate"
+                      },
+                      "Value": {
+                        "aggregations": [
+                          "lastNotNull"
+                        ],
+                        "operation": "aggregate"
+                      },
+                      "__name__": {
+                        "aggregations": []
+                      },
+                      "container_label_com_docker_compose_config_hash": {
+                        "aggregations": []
+                      },
+                      "container_label_com_docker_compose_project": {
+                        "aggregations": []
+                      },
+                      "container_label_com_docker_compose_project_config_files": {
+                        "aggregations": []
+                      },
+                      "container_label_com_docker_compose_project_working_dir": {
+                        "aggregations": [],
+                        "operation": "groupby"
+                      },
+                      "container_label_com_docker_compose_version": {
+                        "aggregations": []
+                      },
+                      "container_label_name": {
+                        "aggregations": []
+                      },
+                      "image": {
+                        "aggregations": [
+                          "lastNotNull"
+                        ],
+                        "operation": "aggregate"
+                      },
+                      "name": {
+                        "aggregations": [
+                          "lastNotNull"
+                        ],
+                        "operation": "groupby"
+                      },
+                      "status": {
+                        "aggregations": [
+                          "lastNotNull"
+                        ],
+                        "operation": "aggregate"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "group": "organize",
+                "kind": "Transformation",
+                "spec": {
+                  "options": {
+                    "excludeByName": {
+                      "Time (lastNotNull)": true,
+                      "container_label_com_docker_compose_project_working_dir": true,
+                      "image (lastNotNull)": true,
+                      "name": true,
+                      "status (lastNotNull)": true
+                    },
+                    "includeByName": {},
+                    "indexByName": {
+                      "Time (lastNotNull)": 1,
+                      "Value (lastNotNull)": 5,
+                      "container_label_com_docker_compose_project_working_dir": 4,
+                      "image (lastNotNull)": 2,
+                      "name": 0,
+                      "status (lastNotNull)": 3
+                    },
+                    "renameByName": {
+                      "Time (lastNotNull)": "",
+                      "Value (lastNotNull)": "Status",
+                      "container_label_com_docker_compose_project_working_dir": "Working Dir",
+                      "image (lastNotNull)": "Image",
+                      "name": "Container",
+                      "status (lastNotNull)": ""
+                    }
+                  }
+                }
+              },
+              {
+                "group": "filterByValue",
+                "kind": "Transformation",
+                "spec": {
+                  "options": {
+                    "filters": [
+                      {
+                        "config": {
+                          "id": "equal",
+                          "options": {
+                            "value": 0
+                          }
+                        },
+                        "fieldName": "Status"
+                      }
+                    ],
+                    "match": "any",
+                    "type": "exclude"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "description": "",
+        "id": 23,
+        "links": [],
+        "title": "Currently UP on '$instance'",
+        "vizConfig": {
+          "group": "stat",
+          "kind": "VizConfig",
+          "spec": {
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "fixedColor": "light-green",
+                  "mode": "thresholds"
+                },
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red",
+                      "value": 0
+                    },
+                    {
+                      "color": "orange",
+                      "value": 3
+                    },
+                    {
+                      "color": "green",
+                      "value": 5
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "options": {
+              "colorMode": "value",
+              "graphMode": "none",
+              "justifyMode": "center",
+              "orientation": "auto",
+              "percentChangeColorMode": "standard",
+              "reduceOptions": {
+                "calcs": [
+                  "count"
+                ],
+                "fields": "/.*/",
+                "values": false
+              },
+              "showPercentChange": false,
+              "textMode": "value",
+              "wideLayout": true
+            }
+          },
+          "version": "13.0.3"
+        }
+      }
+    },
+    "panel-32": {
+      "kind": "Panel",
+      "spec": {
+        "data": {
+          "kind": "QueryGroup",
+          "spec": {
+            "queries": [
+              {
+                "kind": "PanelQuery",
+                "spec": {
+                  "hidden": false,
+                  "query": {
+                    "datasource": {
+                      "name": "${datasource}"
+                    },
+                    "group": "prometheus",
+                    "kind": "DataQuery",
+                    "spec": {
+                      "editorMode": "code",
+                      "exemplar": false,
+                      "expr": "sum(rate(container_cpu_usage_seconds_total{instance=\"$instance\", container_label_com_docker_compose_service=~\"$container\", name!=\"\"}[1m])) by (name, instance) * 100",
+                      "format": "table",
+                      "instant": true,
+                      "interval": "",
+                      "legendFormat": "__auto",
+                      "range": false
+                    },
+                    "version": "v0"
+                  },
+                  "refId": "A"
+                }
+              },
+              {
+                "kind": "PanelQuery",
+                "spec": {
+                  "hidden": false,
+                  "query": {
+                    "datasource": {
+                      "name": "${datasource}"
+                    },
+                    "group": "prometheus",
+                    "kind": "DataQuery",
+                    "spec": {
+                      "editorMode": "code",
+                      "exemplar": false,
+                      "expr": "sum(container_memory_usage_bytes{instance=\"$instance\", container_label_com_docker_compose_service=~\"$container\", name!=\"\"}) by (name, instance)",
+                      "format": "table",
+                      "instant": true,
+                      "legendFormat": "__auto",
+                      "range": false
+                    },
+                    "version": "v0"
+                  },
+                  "refId": "B"
+                }
+              },
+              {
+                "kind": "PanelQuery",
+                "spec": {
+                  "hidden": false,
+                  "query": {
+                    "datasource": {
+                      "name": "${datasource}"
+                    },
+                    "group": "prometheus",
+                    "kind": "DataQuery",
+                    "spec": {
+                      "editorMode": "code",
+                      "exemplar": false,
+                      "expr": "sum(rate(container_fs_reads_bytes_total{container_label_com_docker_compose_service=~\"$container\", instance=\"$instance\", name!=\"\"}[1m])) by (name, instance)\r\n",
+                      "format": "time_series",
+                      "instant": false,
+                      "legendFormat": "__auto",
+                      "range": true
+                    },
+                    "version": "v0"
+                  },
+                  "refId": "C"
+                }
+              },
+              {
+                "kind": "PanelQuery",
+                "spec": {
+                  "hidden": false,
+                  "query": {
+                    "datasource": {
+                      "name": "${datasource}"
+                    },
+                    "group": "prometheus",
+                    "kind": "DataQuery",
+                    "spec": {
+                      "editorMode": "code",
+                      "exemplar": false,
+                      "expr": "sum(rate(container_fs_writes_bytes_total{container_label_com_docker_compose_service=~\"$container\", instance=\"$instance\", name!=\"\"}[1m])) by (name, instance)\r\n",
+                      "format": "time_series",
+                      "instant": false,
+                      "legendFormat": "__auto",
+                      "range": true
+                    },
+                    "version": "v0"
+                  },
+                  "refId": "D"
+                }
+              },
+              {
+                "kind": "PanelQuery",
+                "spec": {
+                  "hidden": false,
+                  "query": {
+                    "datasource": {
+                      "name": "${datasource}"
+                    },
+                    "group": "prometheus",
+                    "kind": "DataQuery",
+                    "spec": {
+                      "editorMode": "code",
+                      "exemplar": false,
+                      "expr": "sum(rate(container_network_receive_bytes_total{container_label_com_docker_compose_service=~\"$container\", instance=\"$instance\", name!=\"\"}[1m])) by (name, instance)\r\n",
+                      "format": "time_series",
+                      "instant": false,
+                      "legendFormat": "__auto",
+                      "range": true
+                    },
+                    "version": "v0"
+                  },
+                  "refId": "E"
+                }
+              },
+              {
+                "kind": "PanelQuery",
+                "spec": {
+                  "hidden": false,
+                  "query": {
+                    "datasource": {
+                      "name": "${datasource}"
+                    },
+                    "group": "prometheus",
+                    "kind": "DataQuery",
+                    "spec": {
+                      "editorMode": "code",
+                      "exemplar": false,
+                      "expr": "sum(rate(container_network_transmit_bytes_total{container_label_com_docker_compose_service=~\"$container\", instance=\"$instance\", name!=\"\"}[1m])) by (name, instance)\r\n",
+                      "format": "time_series",
+                      "instant": false,
+                      "legendFormat": "__auto",
+                      "range": true
+                    },
+                    "version": "v0"
+                  },
+                  "refId": "F"
+                }
+              }
+            ],
+            "queryOptions": {
+              "interval": "30s"
+            },
+            "transformations": [
+              {
+                "group": "timeSeriesTable",
+                "kind": "Transformation",
+                "spec": {
+                  "options": {
+                    "C": {
+                      "stat": "last",
+                      "timeField": "Time"
+                    },
+                    "D": {
+                      "timeField": "Time"
+                    },
+                    "E": {
+                      "timeField": "Time"
+                    },
+                    "F": {
+                      "timeField": "Time"
+                    }
+                  }
+                }
+              },
+              {
+                "group": "joinByField",
+                "kind": "Transformation",
+                "spec": {
+                  "options": {
+                    "byField": "name",
+                    "mode": "outer"
+                  }
+                }
+              },
+              {
+                "group": "groupBy",
+                "kind": "Transformation",
+                "spec": {
+                  "options": {
+                    "fields": {
+                      "Time": {
+                        "aggregations": []
+                      },
+                      "Time 1": {
+                        "aggregations": [],
+                        "operation": "groupby"
+                      },
+                      "Time 2": {
+                        "aggregations": [],
+                        "operation": "groupby"
+                      },
+                      "Trend #C": {
+                        "aggregations": [],
+                        "operation": "groupby"
+                      },
+                      "Trend #D": {
+                        "aggregations": [],
+                        "operation": "groupby"
+                      },
+                      "Trend #E": {
+                        "aggregations": [],
+                        "operation": "groupby"
+                      },
+                      "Trend #F": {
+                        "aggregations": [],
+                        "operation": "groupby"
+                      },
+                      "Value #A": {
+                        "aggregations": [],
+                        "operation": "groupby"
+                      },
+                      "Value #B": {
+                        "aggregations": [],
+                        "operation": "groupby"
+                      },
+                      "Value #C": {
+                        "aggregations": [],
+                        "operation": "groupby"
+                      },
+                      "Value #D": {
+                        "aggregations": [],
+                        "operation": "groupby"
+                      },
+                      "Value #E": {
+                        "aggregations": [],
+                        "operation": "groupby"
+                      },
+                      "Value #F": {
+                        "aggregations": [],
+                        "operation": "groupby"
+                      },
+                      "name": {
+                        "aggregations": [],
+                        "operation": "groupby"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "group": "organize",
+                "kind": "Transformation",
+                "spec": {
+                  "options": {
+                    "excludeByName": {
+                      "Time": true,
+                      "Value #C": false
+                    },
+                    "includeByName": {},
+                    "indexByName": {
+                      "Trend #C": 3,
+                      "Trend #D": 4,
+                      "Trend #E": 5,
+                      "Value #A": 1,
+                      "Value #B": 2,
+                      "Value #F": 6,
+                      "name": 0
+                    },
+                    "renameByName": {
+                      "Trend #C": "Disk read I/O",
+                      "Trend #D": "Disk Write I/O",
+                      "Trend #E": "Network Input",
+                      "Trend #F": "Network Output",
+                      "Value #A": "CPU usage",
+                      "Value #B": "Memory usage",
+                      "Value #C": "Disk Read I/O",
+                      "Value #D": "Disk Write I/O",
+                      "Value #E": "Network Input",
+                      "Value #F": "Network Output",
+                      "name": "Container"
+                    }
+                  }
+                }
+              },
+              {
+                "group": "filterByValue",
+                "kind": "Transformation",
+                "spec": {
+                  "options": {
+                    "filters": [
+                      {
+                        "config": {
+                          "id": "equal",
+                          "options": {
+                            "value": "node_exporter"
+                          }
+                        },
+                        "fieldName": "Container"
+                      }
+                    ],
+                    "match": "any",
+                    "type": "exclude"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "description": "Click on any table header to sort by any stat you want, e.g. CPU / Memory usage.",
+        "id": 32,
+        "links": [],
+        "title": "Detailed Stats",
+        "transparent": true,
+        "vizConfig": {
+          "group": "table",
+          "kind": "VizConfig",
+          "spec": {
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "custom": {
+                  "align": "auto",
+                  "cellOptions": {
+                    "type": "auto"
+                  },
+                  "footer": {
+                    "reducers": []
+                  },
+                  "inspect": false
+                },
+                "decimals": 0,
+                "fieldMinMax": false,
+                "noValue": "N/A",
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "transparent",
+                      "value": 0
+                    }
+                  ]
+                }
+              },
+              "overrides": [
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "CPU usage"
+                  },
+                  "properties": [
+                    {
+                      "id": "unit",
+                      "value": "percent"
+                    },
+                    {
+                      "id": "min",
+                      "value": 0
+                    },
+                    {
+                      "id": "max",
+                      "value": 100
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "mode": "gradient",
+                        "type": "gauge",
+                        "valueDisplayMode": "color"
+                      }
+                    },
+                    {
+                      "id": "custom.width",
+                      "value": 410
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "mode": "continuous-GrYlRd"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Memory usage"
+                  },
+                  "properties": [
+                    {
+                      "id": "unit",
+                      "value": "decbytes"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "mode": "gradient",
+                        "type": "gauge",
+                        "valueDisplayMode": "color"
+                      }
+                    },
+                    {
+                      "id": "max",
+                      "value": 875720704
+                    },
+                    {
+                      "id": "custom.width",
+                      "value": 388
+                    },
+                    {
+                      "id": "min",
+                      "value": 0
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "mode": "continuous-GrYlRd"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Disk read I/O"
+                  },
+                  "properties": [
+                    {
+                      "id": "unit",
+                      "value": "decbytes"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "drawStyle": "line",
+                        "gradientMode": "opacity",
+                        "hideValue": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 2,
+                        "showPoints": "never",
+                        "type": "sparkline"
+                      }
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "mode": "continuous-BlPu"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Disk Write I/O"
+                  },
+                  "properties": [
+                    {
+                      "id": "unit",
+                      "value": "decbytes"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "drawStyle": "line",
+                        "gradientMode": "opacity",
+                        "lineWidth": 2,
+                        "type": "sparkline"
+                      }
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "mode": "continuous-BlPu"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Network Input"
+                  },
+                  "properties": [
+                    {
+                      "id": "unit",
+                      "value": "binbps"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "gradientMode": "hue",
+                        "spanNulls": false,
+                        "type": "sparkline"
+                      }
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "mode": "continuous-BlPu"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Network Output"
+                  },
+                  "properties": [
+                    {
+                      "id": "unit",
+                      "value": "Bps"
+                    },
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "drawStyle": "line",
+                        "gradientMode": "hue",
+                        "hideValue": false,
+                        "showPoints": "never",
+                        "spanNulls": false,
+                        "type": "sparkline"
+                      }
+                    },
+                    {
+                      "id": "decimals",
+                      "value": 1
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "mode": "continuous-BlPu"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Container",
+                    "scope": "series"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.cellOptions",
+                      "value": {
+                        "applyToRow": false,
+                        "type": "color-background"
+                      }
+                    },
+                    {
+                      "id": "color",
+                      "value": {
+                        "fixedColor": "#ff0050",
+                        "mode": "shades"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "options": {
+              "cellHeight": "md",
+              "showHeader": true,
+              "sortBy": [
+                {
+                  "desc": true,
+                  "displayName": "Memory usage"
+                }
+              ]
+            }
+          },
+          "version": "13.0.3"
+        }
+      }
+    },
+    "panel-36": {
+      "kind": "Panel",
+      "spec": {
+        "data": {
+          "kind": "QueryGroup",
+          "spec": {
+            "queries": [
+              {
+                "kind": "PanelQuery",
+                "spec": {
+                  "hidden": false,
+                  "query": {
+                    "datasource": {
+                      "name": "${datasource}"
+                    },
+                    "group": "prometheus",
+                    "kind": "DataQuery",
+                    "spec": {
+                      "editorMode": "code",
+                      "exemplar": false,
+                      "expr": "container_last_seen{name!=\"\"}",
+                      "format": "table",
+                      "instant": true,
+                      "interval": "",
+                      "legendFormat": "__auto",
+                      "range": false
+                    },
+                    "version": "v0"
+                  },
+                  "refId": "A"
+                }
+              }
+            ],
+            "queryOptions": {
+              "interval": "15s"
+            },
+            "transformations": [
+              {
+                "group": "groupBy",
+                "kind": "Transformation",
+                "spec": {
+                  "options": {
+                    "fields": {
+                      "Time": {
+                        "aggregations": [
+                          "lastNotNull"
+                        ],
+                        "operation": "aggregate"
+                      },
+                      "Value": {
+                        "aggregations": [
+                          "lastNotNull"
+                        ],
+                        "operation": "aggregate"
+                      },
+                      "__name__": {
+                        "aggregations": []
+                      },
+                      "container_label_com_docker_compose_config_hash": {
+                        "aggregations": []
+                      },
+                      "container_label_com_docker_compose_project": {
+                        "aggregations": []
+                      },
+                      "container_label_com_docker_compose_project_config_files": {
+                        "aggregations": []
+                      },
+                      "container_label_com_docker_compose_project_working_dir": {
+                        "aggregations": [],
+                        "operation": "groupby"
+                      },
+                      "container_label_com_docker_compose_version": {
+                        "aggregations": []
+                      },
+                      "container_label_name": {
+                        "aggregations": []
+                      },
+                      "image": {
+                        "aggregations": [
+                          "lastNotNull"
+                        ],
+                        "operation": "aggregate"
+                      },
+                      "name": {
+                        "aggregations": [
+                          "lastNotNull"
+                        ],
+                        "operation": "groupby"
+                      },
+                      "status": {
+                        "aggregations": [
+                          "lastNotNull"
+                        ],
+                        "operation": "aggregate"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "group": "organize",
+                "kind": "Transformation",
+                "spec": {
+                  "options": {
+                    "excludeByName": {
+                      "Time (lastNotNull)": true,
+                      "container_label_com_docker_compose_project_working_dir": true,
+                      "image (lastNotNull)": true,
+                      "name": true,
+                      "status (lastNotNull)": true
+                    },
+                    "includeByName": {},
+                    "indexByName": {
+                      "Time (lastNotNull)": 1,
+                      "Value (lastNotNull)": 5,
+                      "container_label_com_docker_compose_project_working_dir": 4,
+                      "image (lastNotNull)": 2,
+                      "name": 0,
+                      "status (lastNotNull)": 3
+                    },
+                    "renameByName": {
+                      "Time (lastNotNull)": "",
+                      "Value (lastNotNull)": "Status",
+                      "container_label_com_docker_compose_project_working_dir": "Working Dir",
+                      "image (lastNotNull)": "Image",
+                      "name": "Container",
+                      "status (lastNotNull)": ""
+                    }
+                  }
+                }
+              },
+              {
+                "group": "filterByValue",
+                "kind": "Transformation",
+                "spec": {
+                  "options": {
+                    "filters": [
+                      {
+                        "config": {
+                          "id": "equal",
+                          "options": {
+                            "value": 0
+                          }
+                        },
+                        "fieldName": "Status"
+                      }
+                    ],
+                    "match": "any",
+                    "type": "exclude"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "description": "",
+        "id": 36,
+        "links": [],
+        "title": "Total # Containers UP",
+        "vizConfig": {
+          "group": "stat",
+          "kind": "VizConfig",
+          "spec": {
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "fixedColor": "light-green",
+                  "mode": "thresholds"
+                },
+                "mappings": [
+                  {
+                    "options": {
+                      "0": {
+                        "color": "red",
+                        "index": 1,
+                        "text": "Not running"
+                      },
+                      "1": {
+                        "index": 0,
+                        "text": "Running"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red",
+                      "value": 0
+                    },
+                    {
+                      "color": "orange",
+                      "value": 3
+                    },
+                    {
+                      "color": "green",
+                      "value": 5
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "options": {
+              "colorMode": "value",
+              "graphMode": "none",
+              "justifyMode": "center",
+              "orientation": "auto",
+              "percentChangeColorMode": "standard",
+              "reduceOptions": {
+                "calcs": [
+                  "count"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "showPercentChange": false,
+              "textMode": "value",
+              "wideLayout": true
+            }
+          },
+          "version": "13.0.3"
+        }
+      }
+    },
+    "panel-37": {
+      "kind": "Panel",
+      "spec": {
+        "data": {
+          "kind": "QueryGroup",
+          "spec": {
+            "queries": [
+              {
+                "kind": "PanelQuery",
+                "spec": {
+                  "hidden": false,
+                  "query": {
+                    "datasource": {
+                      "name": "${datasource}"
+                    },
+                    "group": "prometheus",
+                    "kind": "DataQuery",
+                    "spec": {
+                      "editorMode": "code",
+                      "exemplar": false,
+                      "expr": "count(\n  (time() - max_over_time(container_last_seen{name!=\"\"}[1h])) > 30\n)",
+                      "format": "table",
+                      "instant": true,
+                      "interval": "",
+                      "legendFormat": "__auto",
+                      "range": false
+                    },
+                    "version": "v0"
+                  },
+                  "refId": "A"
+                }
+              }
+            ],
+            "queryOptions": {
+              "interval": "15s",
+              "timeFrom": "1h"
+            },
+            "transformations": [
+              {
+                "group": "groupBy",
+                "kind": "Transformation",
+                "spec": {
+                  "options": {
+                    "fields": {
+                      "Time": {
+                        "aggregations": [
+                          "lastNotNull"
+                        ],
+                        "operation": "aggregate"
+                      },
+                      "Value": {
+                        "aggregations": [
+                          "lastNotNull"
+                        ],
+                        "operation": "aggregate"
+                      },
+                      "__name__": {
+                        "aggregations": []
+                      },
+                      "container_label_com_docker_compose_config_hash": {
+                        "aggregations": []
+                      },
+                      "container_label_com_docker_compose_project": {
+                        "aggregations": []
+                      },
+                      "container_label_com_docker_compose_project_config_files": {
+                        "aggregations": []
+                      },
+                      "container_label_com_docker_compose_project_working_dir": {
+                        "aggregations": [],
+                        "operation": "groupby"
+                      },
+                      "container_label_com_docker_compose_version": {
+                        "aggregations": []
+                      },
+                      "container_label_name": {
+                        "aggregations": []
+                      },
+                      "image": {
+                        "aggregations": [
+                          "lastNotNull"
+                        ],
+                        "operation": "aggregate"
+                      },
+                      "name": {
+                        "aggregations": [
+                          "lastNotNull"
+                        ],
+                        "operation": "groupby"
+                      },
+                      "status": {
+                        "aggregations": [
+                          "lastNotNull"
+                        ],
+                        "operation": "aggregate"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "group": "organize",
+                "kind": "Transformation",
+                "spec": {
+                  "options": {
+                    "excludeByName": {
+                      "Time (lastNotNull)": true,
+                      "container_label_com_docker_compose_project_working_dir": true,
+                      "image (lastNotNull)": true,
+                      "name": true,
+                      "status (lastNotNull)": true
+                    },
+                    "includeByName": {},
+                    "indexByName": {
+                      "Time (lastNotNull)": 1,
+                      "Value (lastNotNull)": 5,
+                      "container_label_com_docker_compose_project_working_dir": 4,
+                      "image (lastNotNull)": 2,
+                      "name": 0,
+                      "status (lastNotNull)": 3
+                    },
+                    "renameByName": {
+                      "Time (lastNotNull)": "",
+                      "Value (lastNotNull)": "Status",
+                      "container_label_com_docker_compose_project_working_dir": "Working Dir",
+                      "image (lastNotNull)": "Image",
+                      "name": "Container",
+                      "status (lastNotNull)": ""
+                    }
+                  }
+                }
+              },
+              {
+                "group": "filterByValue",
+                "kind": "Transformation",
+                "spec": {
+                  "options": {
+                    "filters": [
+                      {
+                        "config": {
+                          "id": "equal",
+                          "options": {
+                            "value": 1
+                          }
+                        },
+                        "fieldName": "Status"
+                      }
+                    ],
+                    "match": "any",
+                    "type": "exclude"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "description": "cAdvisor does not have a native \"down\" metric. This panel is using the container_last_seen metric, but looking back in time to check if it has recently been scraped for that metric, if it has failed the last 1h; it is considered \"down\". This means the counter will reset after a certain amount of time passes.",
+        "id": 37,
+        "links": [],
+        "title": "Total # Containers DOWN",
+        "vizConfig": {
+          "group": "stat",
+          "kind": "VizConfig",
+          "spec": {
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "fixedColor": "light-red",
+                  "mode": "thresholds"
+                },
+                "noValue": "0",
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "text",
+                      "value": 0
+                    },
+                    {
+                      "color": "orange",
+                      "value": 3
+                    },
+                    {
+                      "color": "red",
+                      "value": 5
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "options": {
+              "colorMode": "value",
+              "graphMode": "none",
+              "justifyMode": "center",
+              "orientation": "auto",
+              "percentChangeColorMode": "standard",
+              "reduceOptions": {
+                "calcs": [
+                  "count"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "showPercentChange": false,
+              "textMode": "auto",
+              "wideLayout": true
+            }
+          },
+          "version": "13.0.3"
+        }
+      }
+    },
+    "panel-38": {
+      "kind": "Panel",
+      "spec": {
+        "data": {
+          "kind": "QueryGroup",
+          "spec": {
+            "queries": [
+              {
+                "kind": "PanelQuery",
+                "spec": {
+                  "hidden": false,
+                  "query": {
+                    "datasource": {
+                      "name": "${loki}"
+                    },
+                    "group": "loki",
+                    "kind": "DataQuery",
+                    "spec": {
+                      "direction": "backward",
+                      "editorMode": "code",
+                      "expr": "{job=\"syslog\"} | regexp `docker - (?P<container>[a-zA-Z0-9_-]+):` | container=~\"$container\"",
+                      "queryType": "range"
+                    },
+                    "version": "v0"
+                  },
+                  "refId": "A"
+                }
+              }
+            ],
+            "queryOptions": {
+              "interval": "1m"
+            },
+            "transformations": []
+          }
+        },
+        "description": "",
+        "id": 38,
+        "links": [],
+        "title": "",
+        "transparent": true,
+        "vizConfig": {
+          "group": "logs",
+          "kind": "VizConfig",
+          "spec": {
+            "fieldConfig": {
+              "defaults": {},
+              "overrides": []
+            },
+            "options": {
+              "dedupStrategy": "numbers",
+              "detailsMode": "sidebar",
+              "enableInfiniteScrolling": true,
+              "enableLogDetails": true,
+              "fontSize": "small",
+              "prettifyLogMessage": true,
+              "showControls": false,
+              "showFieldSelector": false,
+              "showLabels": false,
+              "showLevel": true,
+              "showTime": true,
+              "sortOrder": "Descending",
+              "syntaxHighlighting": false,
+              "timestampResolution": "ms",
+              "unwrappedColumns": false,
+              "wrapLogMessage": false
+            }
+          },
+          "version": "13.0.3"
+        }
+      }
+    },
+    "panel-39": {
+      "kind": "Panel",
+      "spec": {
+        "data": {
+          "kind": "QueryGroup",
+          "spec": {
+            "queries": [
+              {
+                "kind": "PanelQuery",
+                "spec": {
+                  "hidden": false,
+                  "query": {
+                    "datasource": {
+                      "name": "${datasource}"
+                    },
+                    "group": "prometheus",
+                    "kind": "DataQuery",
+                    "spec": {
+                      "editorMode": "code",
+                      "expr": "sum by (name) (container_memory_cache{image!=\"\",instance=\"$instance\", container_label_com_docker_compose_service=~\"$container\", name!=\"\"})",
+                      "intervalFactor": 2,
+                      "legendFormat": "{{name}}",
+                      "metric": "container_memory_cache",
+                      "range": true,
+                      "step": 2
+                    },
+                    "version": "v0"
+                  },
+                  "refId": "A"
+                }
+              }
+            ],
+            "queryOptions": {
+              "interval": "1m"
+            },
+            "transformations": []
+          }
+        },
+        "description": "",
+        "id": 39,
+        "links": [],
+        "title": "Container Cached Memory Usage",
+        "transparent": true,
+        "vizConfig": {
+          "group": "timeseries",
+          "kind": "VizConfig",
+          "spec": {
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "fixedColor": "green",
+                  "mode": "continuous-BlPu"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "axisSoftMax": 1100000000,
+                  "barAlignment": 0,
+                  "barWidthFactor": 0.6,
+                  "drawStyle": "line",
+                  "fillOpacity": 10,
+                  "gradientMode": "hue",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "insertNulls": false,
+                  "lineInterpolation": "linear",
+                  "lineWidth": 2,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "never",
+                  "showValues": false,
+                  "spanNulls": true,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "none"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "decimals": 0,
+                "min": 0,
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "bytes"
+              },
+              "overrides": []
+            },
+            "options": {
+              "annotations": {
+                "clustering": -1,
+                "multiLane": false
+              },
+              "legend": {
+                "calcs": [
+                  "mean"
+                ],
+                "displayMode": "table",
+                "limit": 10,
+                "placement": "right",
+                "showLegend": true,
+                "sortBy": "Mean",
+                "sortDesc": true
+              },
+              "tooltip": {
+                "hideZeros": true,
+                "hoverProximity": 100,
+                "maxHeight": 600,
+                "mode": "single",
+                "sort": "desc"
+              }
+            }
+          },
+          "version": "13.0.3"
+        }
+      }
+    }
+  },
+  "layout": {
+    "kind": "RowsLayout",
+    "spec": {
+      "rows": [
+        {
+          "kind": "RowsLayoutRow",
+          "spec": {
+            "collapse": false,
+            "layout": {
+              "kind": "GridLayout",
+              "spec": {
+                "items": [
+                  {
+                    "kind": "GridLayoutItem",
+                    "spec": {
+                      "element": {
+                        "kind": "ElementReference",
+                        "name": "panel-23"
+                      },
+                      "height": 3,
+                      "width": 6,
+                      "x": 0,
+                      "y": 0
+                    }
+                  },
+                  {
+                    "kind": "GridLayoutItem",
+                    "spec": {
+                      "element": {
+                        "kind": "ElementReference",
+                        "name": "panel-36"
+                      },
+                      "height": 3,
+                      "width": 6,
+                      "x": 6,
+                      "y": 0
+                    }
+                  },
+                  {
+                    "kind": "GridLayoutItem",
+                    "spec": {
+                      "element": {
+                        "kind": "ElementReference",
+                        "name": "panel-22"
+                      },
+                      "height": 3,
+                      "width": 6,
+                      "x": 12,
+                      "y": 0
+                    }
+                  },
+                  {
+                    "kind": "GridLayoutItem",
+                    "spec": {
+                      "element": {
+                        "kind": "ElementReference",
+                        "name": "panel-37"
+                      },
+                      "height": 3,
+                      "width": 6,
+                      "x": 18,
+                      "y": 0
+                    }
+                  }
+                ]
+              }
+            },
+            "title": "Docker Container Stats"
+          }
+        },
+        {
+          "kind": "RowsLayoutRow",
+          "spec": {
+            "collapse": false,
+            "layout": {
+              "kind": "GridLayout",
+              "spec": {
+                "items": [
+                  {
+                    "kind": "GridLayoutItem",
+                    "spec": {
+                      "element": {
+                        "kind": "ElementReference",
+                        "name": "panel-12"
+                      },
+                      "height": 8,
+                      "width": 12,
+                      "x": 0,
+                      "y": 0
+                    }
+                  },
+                  {
+                    "kind": "GridLayoutItem",
+                    "spec": {
+                      "element": {
+                        "kind": "ElementReference",
+                        "name": "panel-13"
+                      },
+                      "height": 8,
+                      "width": 12,
+                      "x": 12,
+                      "y": 0
+                    }
+                  },
+                  {
+                    "kind": "GridLayoutItem",
+                    "spec": {
+                      "element": {
+                        "kind": "ElementReference",
+                        "name": "panel-14"
+                      },
+                      "height": 8,
+                      "width": 12,
+                      "x": 0,
+                      "y": 8
+                    }
+                  },
+                  {
+                    "kind": "GridLayoutItem",
+                    "spec": {
+                      "element": {
+                        "kind": "ElementReference",
+                        "name": "panel-39"
+                      },
+                      "height": 8,
+                      "width": 12,
+                      "x": 12,
+                      "y": 8
+                    }
+                  }
+                ]
+              }
+            },
+            "title": "Health"
+          }
+        },
+        {
+          "kind": "RowsLayoutRow",
+          "spec": {
+            "collapse": false,
+            "layout": {
+              "kind": "GridLayout",
+              "spec": {
+                "items": [
+                  {
+                    "kind": "GridLayoutItem",
+                    "spec": {
+                      "element": {
+                        "kind": "ElementReference",
+                        "name": "panel-32"
+                      },
+                      "height": 10,
+                      "width": 24,
+                      "x": 0,
+                      "y": 0
+                    }
+                  }
+                ]
+              }
+            },
+            "title": "Comparison Chart"
+          }
+        },
+        {
+          "kind": "RowsLayoutRow",
+          "spec": {
+            "collapse": false,
+            "layout": {
+              "kind": "GridLayout",
+              "spec": {
+                "items": [
+                  {
+                    "kind": "GridLayoutItem",
+                    "spec": {
+                      "element": {
+                        "kind": "ElementReference",
+                        "name": "panel-38"
+                      },
+                      "height": 12,
+                      "width": 24,
+                      "x": 0,
+                      "y": 0
+                    }
+                  }
+                ]
+              }
+            },
+            "title": "Docker logs"
+          }
+        }
+      ]
+    }
+  },
+  "links": [],
+  "liveNow": false,
+  "preload": false,
+  "tags": [
+    "prometheus",
+    "cadvisor"
+  ],
+  "timeSettings": {
+    "autoRefresh": "1m",
+    "autoRefreshIntervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "fiscalYearStartMonth": 0,
+    "from": "now-12h",
+    "hideTimepicker": false,
+    "timezone": "browser",
+    "to": "now"
+  },
+  "title": "Docker Containers",
+  "variables": [
+    {
+      "kind": "DatasourceVariable",
+      "spec": {
+        "allowCustomValue": true,
+        "current": {
+          "text": "prometheus",
+          "value": "afqlhc4c9uewwf"
+        },
+        "hide": "dontHide",
+        "includeAll": false,
+        "label": "Prometheus Datasource",
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "pluginId": "prometheus",
+        "refresh": "onDashboardLoad",
+        "regex": "/^(?!default$).*/",
+        "skipUrlSync": false
+      }
+    },
+    {
+      "kind": "QueryVariable",
+      "spec": {
+        "allowCustomValue": false,
+        "current": {
+          "text": "server1",
+          "value": "server1"
+        },
+        "definition": "label_values(container_cpu_system_seconds_total,instance)",
+        "description": "",
+        "hide": "dontHide",
+        "includeAll": false,
+        "label": "Instance",
+        "multi": false,
+        "name": "instance",
+        "options": [],
+        "query": {
+          "datasource": {
+            "name": "${datasource}"
+          },
+          "group": "prometheus",
+          "kind": "DataQuery",
+          "spec": {
+            "qryType": 1,
+            "query": "label_values(container_cpu_system_seconds_total,instance)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "version": "v0"
+        },
+        "refresh": "onDashboardLoad",
+        "regex": "",
+        "regexApplyTo": "value",
+        "skipUrlSync": false,
+        "sort": "numericalAsc"
+      }
+    },
+    {
+      "kind": "DatasourceVariable",
+      "spec": {
+        "allowCustomValue": true,
+        "current": {
+          "text": "loki",
+          "value": "ffqlhddhbad4wb"
+        },
+        "description": "",
+        "hide": "hideVariable",
+        "includeAll": false,
+        "label": "Loki",
+        "multi": false,
+        "name": "loki",
+        "options": [],
+        "pluginId": "loki",
+        "refresh": "onDashboardLoad",
+        "regex": "",
+        "skipUrlSync": false
+      }
+    },
+    {
+      "kind": "QueryVariable",
+      "spec": {
+        "allValue": ".*",
+        "allowCustomValue": false,
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "definition": "label_values({instance=~\"$instance\"},container_label_com_docker_compose_service)",
+        "description": "",
+        "hide": "dontHide",
+        "includeAll": true,
+        "label": "Container",
+        "multi": true,
+        "name": "container",
+        "options": [],
+        "query": {
+          "datasource": {
+            "name": "${datasource}"
+          },
+          "group": "prometheus",
+          "kind": "DataQuery",
+          "spec": {
+            "qryType": 1,
+            "query": "label_values({instance=~\"$instance\"},container_label_com_docker_compose_service)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "version": "v0"
+        },
+        "refresh": "onDashboardLoad",
+        "regex": "",
+        "regexApplyTo": "value",
+        "skipUrlSync": false,
+        "sort": "disabled"
+      }
+    }
+  ]
+}
